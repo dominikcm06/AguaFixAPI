@@ -36,7 +36,6 @@ export const generateReportTemplate = (dto: CreateReportDto): string => {
         <td align="center">
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:560px;background-color:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 4px 16px rgba(13,43,69,.08);">
 
-            <!-- Header -->
             <tr>
               <td style="background-color:#0d63b3;padding:32px 32px 28px 32px;">
                 <p style="margin:0 0 10px 0;font-family:Helvetica,Arial,sans-serif;font-size:12px;line-height:16px;letter-spacing:1.4px;text-transform:uppercase;color:#aed6f7;">AguaFix &middot; Alerta</p>
@@ -45,7 +44,6 @@ export const generateReportTemplate = (dto: CreateReportDto): string => {
               </td>
             </tr>
 
-            <!-- Severidad -->
             <tr>
               <td style="padding:24px 32px 0 32px;">
                 <table role="presentation" cellpadding="0" cellspacing="0" border="0">
@@ -58,7 +56,6 @@ export const generateReportTemplate = (dto: CreateReportDto): string => {
               </td>
             </tr>
 
-            <!-- Detalles -->
             <tr>
               <td style="padding:24px 32px 8px 32px;">
                 <h2 style="margin:0 0 8px 0;font-family:Helvetica,Arial,sans-serif;font-size:14px;line-height:20px;letter-spacing:1px;text-transform:uppercase;color:#0d63b3;">Datos del reporte</h2>
@@ -70,7 +67,6 @@ ${row('Telefono de contacto', reporterPhone)}
               </td>
             </tr>
 
-            <!-- Contacto -->
             <tr>
               <td style="padding:24px 32px 8px 32px;">
                 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#eaf3fb;border-radius:12px;">
@@ -85,7 +81,6 @@ ${row('Telefono de contacto', reporterPhone)}
               </td>
             </tr>
 
-            <!-- Footer -->
             <tr>
               <td style="padding:24px 32px 32px 32px;">
                 <p style="margin:0;font-family:Helvetica,Arial,sans-serif;font-size:12px;line-height:18px;color:#7d95ab;text-align:center;">Recibiste este correo porque formas parte de la cuadrilla de mantenimiento de AguaFix.</p>
