@@ -1,0 +1,28 @@
+meta {
+  name: 1 - Register User
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/auth/register
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "name": "Cuadrilla Central",
+    "email": "cuadrilla@aguafix.local",
+    "password": "secret123",
+    "isNotificationEnabled": true
+  }
+}
+
+assert {
+  res.status: eq 201
+}

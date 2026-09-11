@@ -1,0 +1,18 @@
+import { IsIn, IsNotEmpty, IsString } from 'class-validator';
+
+export class CreateReportDto {
+  @IsString()
+  @IsNotEmpty()
+  address!: string;
+
+  @IsString()
+  @IsNotEmpty()
+  description!: string;
+
+  @IsIn(['low', 'medium', 'high'])
+  severity!: string;
+
+  @IsString()
+  @IsNotEmpty()
+  reporterPhone!: string;
+}
