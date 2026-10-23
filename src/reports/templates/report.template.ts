@@ -18,7 +18,10 @@ const row = (label: string, value: string) => `
                 <td align="right" style="padding:14px 0;border-bottom:1px solid #dbe9f5;font-family:Helvetica,Arial,sans-serif;font-size:16px;line-height:22px;color:#0d2b45;font-weight:bold;">${value}</td>
               </tr>`;
 
-export const generateReportTemplate = (dto: CreateReportDto): string => {
+export const generateReportTemplate = (
+  dto: CreateReportDto,
+  photoUrl: string,
+): string => {
   const { address, description, severity, reporterPhone } = dto;
   const severityLabel = SEVERITY_LABELS[severity] ?? severity;
   const severityColor = SEVERITY_COLORS[severity] ?? '#0d2b45';
@@ -57,11 +60,21 @@ export const generateReportTemplate = (dto: CreateReportDto): string => {
             </tr>
 
             <tr>
+              <td style="padding:24px 32px 0 32px;">
+                <h2 style="margin:0 0 12px 0;font-family:Helvetica,Arial,sans-serif;font-size:14px;line-height:20px;letter-spacing:1px;text-transform:uppercase;color:#0d63b3;">Foto de la fuga</h2>
+                <a href="${photoUrl}" style="text-decoration:none;">
+                  <img src="${photoUrl}" alt="Foto de la fuga reportada" width="496" style="display:block;width:100%;max-width:496px;height:auto;border:0;border-radius:12px;" />
+                </a>
+              </td>
+            </tr>
+
+            <tr>
               <td style="padding:24px 32px 8px 32px;">
                 <h2 style="margin:0 0 8px 0;font-family:Helvetica,Arial,sans-serif;font-size:14px;line-height:20px;letter-spacing:1px;text-transform:uppercase;color:#0d63b3;">Datos del reporte</h2>
                 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
 ${row('Direccion', address)}
 ${row('Descripcion', description)}
+${row('Severidad', severityLabel)}
 ${row('Telefono de contacto', reporterPhone)}
                 </table>
               </td>

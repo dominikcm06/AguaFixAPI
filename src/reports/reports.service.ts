@@ -11,8 +11,8 @@ export class ReportsService {
     private readonly reportRepository: Repository<Report>,
   ) {}
 
-  async create(dto: CreateReportDto): Promise<Report> {
-    const report = this.reportRepository.create(dto);
+  async create(dto: CreateReportDto, photoUrl: string): Promise<Report> {
+    const report = this.reportRepository.create({ ...dto, photoUrl });
     return this.reportRepository.save(report);
   }
 

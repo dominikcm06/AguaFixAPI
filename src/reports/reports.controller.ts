@@ -1,5 +1,15 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Get,
+  Post,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { EmailService } from '../email/email.service';
+import { StorageService } from '../storage/storage.service';
 import { UsersService } from '../users/users.service';
 import { envs } from '../config/envs';
 import { CreateReportDto } from './dtos/create-report.dto';
@@ -12,6 +22,7 @@ export class ReportsController {
     private readonly reportsService: ReportsService,
     private readonly emailService: EmailService,
     private readonly usersService: UsersService,
+    private readonly storageService: StorageService,
   ) {}
 
   @Get()
@@ -20,8 +31,20 @@ export class ReportsController {
   }
 
   @Post()
-  async create(@Body() dto: CreateReportDto) {
-    const report = await this.reportsService.create(dto);
+  @UseInterceptors(FileInterceptor('photo'))
+  async create(
+    @Body() dto: CreateReportDto,
+    @UploadedFile() photo?: Express.Multer.File,
+  ) {
+    if (!photo) {
+      throw new BadRequestException('La foto de la fuga es obligatoria');
+    }
+    if (!photo.mimetype.startsWith('image/')) {
+      throw new BadRequestException('El archivo photo debe ser una imagen');
+    }
+
+    const photoUrl = await this.storageService.uploadFile(photo, 'reports');
+    const report = await this.reportsService.create(dto, photoUrl);
 
     const notifiableEmails = await this.usersService.findNotifiableEmails();
     const recipients =
@@ -29,7 +52,7 @@ export class ReportsController {
         ? notifiableEmails
         : [envs.MAINTENANCE_FALLBACK_EMAIL];
 
-    const template = generateReportTemplate(dto);
+    const template = generateReportTemplate(dto, photoUrl);
     try {
       await this.emailService.sendEmail(
         recipients.join(','),

@@ -1,0 +1,17 @@
+.env
+.env.*
+!.env.example
+compose.yaml
+node_modules
+dist
+.git
+.github
+.gitignore
+*.tsbuildinfo
+coverage
+bruno
+test
+Dockerfile
+.dockerignore
+*.log
+*.csv

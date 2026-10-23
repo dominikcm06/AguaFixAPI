@@ -6,21 +6,16 @@ meta {
 
 post {
   url: {{baseUrl}}/reports
-  body: json
+  body: multipartForm
   auth: none
 }
 
-headers {
-  Content-Type: application/json
-}
-
-body:json {
-  {
-    "address": "Av. Siempre Viva 742",
-    "description": "Fuga de agua en la tuberia principal frente a la casa",
-    "severity": "high",
-    "reporterPhone": "+50412345678"
-  }
+body:multipart-form {
+  address: Av. Siempre Viva 742
+  description: Fuga de agua en la tuberia principal frente a la casa
+  severity: high
+  reporterPhone: +50412345678
+  photo: @file(fuga.jpg)
 }
 
 assert {

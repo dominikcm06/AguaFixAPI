@@ -18,4 +18,10 @@ export const envs = {
     .get('MAINTENANCE_FALLBACK_EMAIL')
     .required()
     .asString(),
+
+  AWS_REGION: env.get('AWS_REGION').required().asString(),
+  AWS_ACCESS_KEY_ID: env.get('AWS_ACCESS_KEY_ID').required().asString(),
+  AWS_SECRET_ACCESS_KEY: env.get('AWS_SECRET_ACCESS_KEY').required().asString(),
+  AWS_SESSION_TOKEN: env.get('AWS_SESSION_TOKEN').asString(),
+  AWS_BUCKET_NAME: env.get('AWS_BUCKET_NAME').required().asString(),
 };

@@ -12,6 +12,7 @@ export const dataSourceOptions: DataSourceOptions = {
   password: envs.DB_PASSWORD,
   entities: [Report, User],
   synchronize: false,
+  migrationsRun: true,
   migrations: ['dist/db/migrations/[0-9]*-*.js'],
 };
 

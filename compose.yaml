@@ -6,11 +6,33 @@ services:
     ports:
       - '5432:5432'
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=secret123
-      - POSTGRES_DB=aguafixdb
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
     volumes:
       - aguafix_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    image: dominikmoreno/aguafix-api:latest
+    pull_policy: always
+    container_name: aguafix-api
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      PORT: 3000
+    ports:
+      - '3000:3000'
+    depends_on:
+      postgres:
+        condition: service_healthy
 
 volumes:
   aguafix_postgres_data:
