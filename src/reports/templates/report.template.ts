@@ -31,7 +31,7 @@ export const generateReportTemplate = (
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Nueva fuga de agua reportada</title>
+    <title>Reporte de nueva fuga de agua </title>
   </head>
   <body style="margin:0;padding:0;background-color:#eef4fa;">
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#eef4fa;padding:32px 12px;">
